@@ -1,0 +1,397 @@
+寒假项目要求：1.在C++平台下提供一个可以实现18种分数与分数间计算（+,-,*,/,^,前后++,前后--,+=,-=,>,<,>=,<=,==,浮点化）的类封装，同时重载<<与>>，以*/*的形式分别输出与输入分数对象Rational，对符号位置不做要求。
+A.使用抛出异常来实现防止分母为零的设计,只要求在构造时检验。
+B.对接口安全不做要求；
+C.所有赋值型运算符返回布尔值；
+D.要求在计算时实现约分
+2.要求接口与实现分离；
+3.要求可以实现级联的运算；
+4.要求提供完整的测试样例；
+5.要求提供完整的接口应用说明；
+接口示例：
+class Rational{
+friend std::ostream& operator<<(std::ostream&,const Rational& );
+friend std::istream& operator>>(std::istream&,Rational& );
+public:
+Rational operator+(Rational& );...
+long int& visitSur(void);...
+private:
+long int sur;
+long int dep;
+}
+
+参考代码：
+//P.h
+#ifndef P_H_INCLUDED
+#define P_H_INCLUDED
+#include <iostream>
+#include <stdexcept>
+class Rational{
+//achievement:P.cpp
+    friend std::ostream& operator<<(std::ostream&,const Rational& );
+    friend std::istream& operator>>(std::istream&,Rational& );
+public:
+//全局函数：
+int maxDed(int a,int b){
+    if(a < 0) a *= (-1);
+    if(b < 0) b *= (-1);
+    if(a < b){
+        int hold = a;
+        a = b;
+        b = hold;
+    }
+    if(a != b)
+        maxDed(a-b,b);
+    else
+        return a;
+}//求最大正公约数
+void decrease(long int& sur1,long int& dep1){
+    while(maxDed(sur1,dep1)!=1){
+        long int temp = maxDed(sur1,dep1);
+        sur1/=temp;
+        dep1/=temp;
+    }
+}//约分到互质
+    explicit Rational(long int = 1,long int = 1);
+    long int& visitSur(void);
+    long int& visitDep(void);
+    void printInDouble();
+
+//achievement:calculate.cpp
+    Rational operator+(Rational& );
+    Rational operator-(Rational& );
+    Rational operator*(Rational& );
+    Rational operator/(Rational& );
+    Rational operator^(int );
+
+//achievement:extraCalculate.cpp
+    void increseOne(void);
+    Rational& operator++(void);
+    Rational operator++(int);
+    bool operator+=(Rational& m1);
+
+    void decreaseOne(void);
+    Rational& operator--(void);
+    Rational operator--(int);
+    bool operator-=(Rational& m1);
+
+//achievement:compare.cpp
+    bool operator=(Rational& );
+    bool operator==(Rational& );
+    bool operator>(Rational& );
+    bool operator<(Rational& );
+    bool operator<=(Rational& );
+    bool operator>=(Rational& );
+
+private:
+    long int sur;
+    long int dep;
+};
+#endif // P_H_INCLUDED
+
+//P.cpp
+#ifndef RATIONAL_H_INCLUDED
+#define RATIONAL_H_INCLUDED
+
+#include"P.h"
+#include<iomanip>
+#include<iostream>
+#include<stdexcept>
+
+Rational::Rational(long int Dep,long int Sur)
+    :sur(Sur){
+        if(Dep == 0)
+            throw std::invalid_argument("please check your code if any item is defined as ?/0.program terminal");
+        else
+            dep = Dep;
+}//Rational类的构造函数
+
+long int& Rational::visitDep(void){
+        return dep;
+    }
+long int& Rational::visitSur(void){
+        return sur;
+    }//访问以及修改函数
+
+void Rational::printInDouble(){
+    std::cout << (double)sur/dep;
+}
+std::ostream& operator<<(std::ostream& output,const Rational& m1){
+    if(m1.sur != 0)
+    output << std::setw(3) << m1.sur << '/' << std::setw(3) << m1.dep;
+    else
+    output << 0;
+    return output;
+}//输出函数
+
+std::istream& operator>>(std::istream& input,Rational& m1){
+        input >> m1.sur;
+        input.ignore(1,'/');
+        input >> m1.dep;
+        while(m1.dep==0){
+            std::cout << "zero error, please input again:";
+            input >> m1.sur;
+            input.ignore(1,'/');
+            input >> m1.dep;
+        }
+        return input;
+}//输入函数
+#endif
+
+//calculate.cpp
+#include "P.h"
+Rational Rational::operator+(Rational& m1){
+    Rational t1;
+    long int sur1 = (m1.visitSur()) * dep + sur * (m1.visitDep());
+    long int dep1 = (m1.visitDep()) * dep;
+
+    decrease(sur1,dep1);
+    if(sur1 < 0&&dep1 < 0){
+        dep1 *= (-1);
+        sur1 *= (-1);
+    }
+    t1.visitSur() = sur1;
+    t1.visitDep() = dep1;
+    return t1;
+}
+Rational Rational::operator-(Rational& m1){
+    Rational t1;
+    long int sur1 = sur * (m1.visitDep())-(m1.visitSur()) * dep;
+    long int dep1 = (m1.visitDep()) * dep;
+
+    decrease(sur1,dep1);
+    if(sur1 < 0&&dep1 < 0){
+        dep1 *= (-1);
+        sur1 *= (-1);
+    }
+    t1.visitSur() = sur1;
+    t1.visitDep() = dep1;
+    return t1;
+}
+Rational Rational::operator*(Rational& m1){
+    Rational t1;
+    long int sur1 = (m1.visitSur()) * sur;
+    long int dep1 = (m1.visitDep()) * dep;
+
+    decrease(sur1,dep1);
+    if(sur1 < 0&&dep1 < 0){
+        dep1 *= (-1);
+        sur1 *= (-1);
+    }
+    t1.visitSur() = sur1;
+    t1.visitDep() = dep1;
+    return t1;
+}
+Rational Rational::operator/(Rational& m1){
+    Rational t1;
+    long int sur1 = (m1.visitSur()) * dep;
+    long int dep1 = (m1.visitDep()) * sur;
+
+    decrease(sur1,dep1);
+    if(sur1 < 0&&dep1 < 0){
+        dep1 *= (-1);
+        sur1 *= (-1);
+    }
+    t1.visitSur() = sur1;
+    t1.visitDep() = dep1;
+    return t1;
+}
+Rational Rational::operator^(int m){
+    Rational t1;
+    long int temp1 = sur;
+    long int temp2 = dep;
+    for(int i=0;i<m;++i){
+        (t1.visitSur()) *= temp1;
+        (t1.visitDep()) *= temp2;
+    }
+    decrease(t1.visitSur(),t1.visitDep());
+    if(t1.visitSur() < 0 && t1.visitDep() < 0){
+        t1.visitDep() *= (-1);
+        t1.visitSur() *= (-1);
+    }
+    return t1;
+}
+
+//extraCalculate.cpp
+#include"P.h"
+void Rational::increseOne(void){
+     sur += dep;
+     decrease(sur,dep);
+}
+
+Rational& Rational::operator++(void){
+    increseOne();
+    return (*this);
+}
+Rational Rational::operator++(int){//一定没有返回引用
+   Rational temp = *this;
+   increseOne();
+   return temp;
+}
+bool Rational::operator+=(Rational& m1){
+    long int sur1 = (m1.visitSur()) * dep + sur * (m1.visitDep());
+    long int dep1 = (m1.visitDep()) * dep;
+
+    decrease(sur1,dep1);
+    if(sur1 < 0&&dep1 < 0){
+        dep1 *= (-1);
+        sur1 *= (-1);
+    }
+    sur = sur1;
+    dep = dep1;
+    return true;
+}
+
+
+void Rational::decreaseOne(void){
+    sur -= dep;
+    decrease(sur,dep);
+    if(sur < 0 && dep < 0){
+    sur *= (-1);
+    dep *= (-1);
+    }
+}
+
+Rational& Rational::operator--(void){
+    decreaseOne();
+    return (*this);
+}
+Rational Rational::operator--(int){
+   Rational temp = *this;
+   decreaseOne();
+   return temp;
+}
+bool Rational::operator-=(Rational& m1){
+    long int sur1 = sur * (m1.visitDep())-(m1.visitSur()) * dep;
+    long int dep1 = (m1.visitDep()) * dep;
+
+    decrease(sur1,dep1);
+    if(sur1 < 0&&dep1 < 0){
+        dep1 *= (-1);
+        sur1 *= (-1);
+    }
+    sur = sur1;
+    dep = dep1;
+    return true;
+}
+
+//compare.cpp
+#include"P.h"
+bool Rational::operator=(Rational& m1){
+    sur = m1.visitSur();
+    dep = m1.visitDep();
+    decrease(sur,dep);
+    return true;
+}
+bool Rational::operator==(Rational& m1){
+    long int dep1 = m1.visitDep();
+    long int sur1 = m1.visitSur();
+    decrease(dep1,sur1);
+    decrease(sur,dep);
+    return (dep1 == dep && sur1 == sur);
+}
+bool Rational::operator>(Rational& m1){
+    return ((((*this)-m1).visitSur())*(((*this)-m1).visitDep()) > 0);
+}
+bool Rational::operator<(Rational& m1){
+    return ((((*this)-m1).visitSur())*(((*this)-m1).visitDep()) < 0);
+}
+bool Rational::operator>=(Rational& m1){
+    return (!((*this)<m1));
+}
+bool Rational::operator<=(Rational& m1){
+    return (!((*this)>m1));
+}
+
+//测试：main.cpp
+#include <iostream>
+#include"P.h"
+#define DEBUG
+using namespace std;
+int main()
+{
+
+    #ifndef DEBUG
+    cout << "the ability of test hasn't begun yet";
+    #endif // DEBUG
+    #ifdef DEBUG
+    cout <<"We will show the standard test result to you:\n";
+
+    //这是展示创建 输入 输出 和访问 更改的函数块 config: P.cpp
+    Rational rP1(3,5);
+    cout << "rP1 is created as" << rP1 << endl;
+    rP1.visitDep() -= 1;
+    rP1.visitSur() -= 2;
+    cout << "rP1 is redefined as" << rP1 << endl;
+    cout << "rP1 is double:";
+    rP1.printInDouble();
+    cout << endl << "please redefine rP1:";//输入形式为*/*。
+    cin >> rP1;
+    cout << "rP1 is redefined as" << rP1 << endl;
+
+    //这里是展示计算以及额外计算程序的程序块 config: calculate.cpp//extracalculate.cpp
+    Rational rP2;
+    cout << endl << "please create rP2,when rP2's denominator is 0,you quit the process:";
+    cin >> rP2;
+
+    int flag;
+    cout << "we will calculate rP1 and rP2's sample,flag when 0 stop,flag:";
+    cin >> flag;
+    while(flag!=0){
+        Rational plusRe = rP1 + rP2; cout << "plus result is:" << plusRe << endl;
+        Rational minusRe = rP1 - rP2; cout << "minus result is:" << minusRe << endl;
+        Rational accRe = rP1 * rP2; cout << "accumulate result is:" << accRe << endl;
+        Rational decRe = rP1 / rP2; cout << "decline result is:" << decRe << endl;
+
+        cout << "now input the powNum of rP1:";
+        int powNum;
+        cin >> powNum;
+        Rational powRe = rP1^powNum;
+        cout << "power result is:" << powRe << endl;
+
+        cout << "when we use rP1+=rP2:";
+        rP1+=rP2;
+        cout << "rP1 is redefined as" << rP1 << endl;
+        cout << "when we use rP1-=rP2:";
+        rP1-=rP2;
+        cout << "rP1 is redefined as" << rP1 << endl;
+
+        cout << "when we use temp = rP1++:";
+        Rational temp = rP1++;
+        cout << "temp is defined as" << temp << "while rP1 is" << rP1 << endl;
+        cout << "when we use temp2 = rP1--:";
+        Rational temp2 = rP1--;
+        cout << "temp2 is defined as" << temp2 << "while rP1 is" << rP1 << endl;
+
+        cout << "when we use temp3 = ++rP1:";
+        Rational temp3 = ++rP1;
+        cout << "temp3 is defined as" << temp3 << "while rP1 is" << rP1 << endl;
+        cout << "when we use temp4 = --rP1:";
+        Rational temp4 = --rP1;
+        cout << "temp4 is defined as" << temp4 << "while rP1 is" << rP1 << endl;
+
+//这里是展示比较大小的程序块,赋值已经在++中演示过:config:compare.cpp
+        cout << "we will prepare rP1 and rP2: ";
+        if(rP1 < rP2){
+            cout << "  rP1 < rP2" << endl;
+        }
+        if(rP1 > rP2){
+            cout << "  rP1 > rP2" << endl;
+        }
+        if(rP1 == rP2){
+            cout << "  rP1 = rP2" << endl;
+        }
+        if(rP1 <= rP2){
+            cout << "  rP1 <= rP2";
+        }
+        if(rP1 >= rP2){
+            cout << "rP1 >= rP2";
+        }
+        cout << endl << "we will calculate rP1 and rP2's sample,flag when 0 stop,flag:" << endl;
+        cin >> flag;
+        if(flag!=0){
+        cout << endl << "please recreate rP2:";
+        cin >> rP2;}
+    }
+    #endif // DEBUG
+    cout << "Bye!";
+}
