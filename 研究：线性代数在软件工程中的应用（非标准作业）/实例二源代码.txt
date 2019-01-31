@@ -1,0 +1,145 @@
+/*邢国浩*2018141463075*实例二****************/
+/*线性代数在软件工程学科中的应用****************/
+/*在GUU COMPILER*Codeblocks环境下运行通过*/
+/*2018年12月19日*15:16:26*******************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include<windows.h>
+char state='n';//世界坐标系相对量定义：上北n下南s左西w右东e。
+int xstate=0;//该变量用于控制起笔还是落笔。
+int Dstate[1][2]={{0,1}};//子坐标相对矩阵
+int floor[50][50] ={0};//世界坐标系
+int i=0;
+int j=0;//分别表示横纵坐标
+
+void instructions(void);
+
+int main(){
+   int m,n,wind=1;//wind用于控制死亡
+   int i1=0;
+   int j1=0;
+   instructions();
+   for(i1=0;i1<10;i1++){
+    for(j1=0;j1<10;j1++){
+        printf("%d",floor[i1][j1]=0);
+    }
+    puts("");
+   }
+
+   while(wind!=0){
+    printf("\n输入命令：\n");
+    scanf("%d",&m);
+        switch(m){
+        case 1:
+            xstate=0;
+            break;
+        case 2:
+            xstate=1;
+            break;
+        case 3:
+            puts("已右转");
+            direction(3);
+            break;
+        case 4:
+            puts("已左转");
+            direction(4);
+            break;
+        case 5:
+            printf("输入前进距离：\n");
+            scanf("%d",&n);
+            move(n,xstate);
+            break;
+        case 6:
+            print();
+            break;
+        case 9:
+            wind=0;
+            break;
+        default:
+            puts("无效命令");
+            break;
+        }
+   }
+   system("pause");
+   return 0;
+}
+void instructions(void){
+    puts("这里是关于文档中第二个应用的程序演示");
+    puts("现在一个50*50的地板上有一个神龟--马坏，你可以键入如下命令的控制他");
+    puts("键入命令1，马坏将扔掉他的笔");
+    puts("键入命令2，马坏将拿起他的笔并在他行进的路线中留下痕迹");
+    puts("键入命令3，马坏将右转");
+    puts("键入命令4，马坏将左转");
+    puts("键入命令5，马坏将前进，你可以指定他前进的距离");
+    puts("键入命令6，将打印马坏画过的路线");
+    puts("键入命令9，马坏被杀掉");
+    puts("");
+    puts("马坏不会直接后退，不过你可以使用右转再右转使他后退");
+    puts("一开始，马坏再最左上角面向上方（西北角面向北方），并未拿起笔");
+}
+int direction(int m1){
+    if(m1==3){
+        switch(state){
+        case 'n':
+            Dstate[0][1]=1;
+            Dstate[0][0]=0;
+            state='e';
+            break;
+        case 's':
+            Dstate[0][1]=-1;
+            Dstate[0][0]=0;
+            state='w';
+            break;
+        case 'e':
+            Dstate[0][1]=0;
+            Dstate[0][0]=1;
+            state='s';
+            break;
+        case 'w':
+            Dstate[0][1]=0;
+            Dstate[0][0]=-1;
+            state='n';
+            break;
+        }}
+    else if(m1==4){
+        switch(state){
+        case 'n':
+            Dstate[0][1]=-1;
+            Dstate[0][0]=0;
+            state='w';
+            break;
+        case 's':
+            Dstate[0][1]=1;
+            Dstate[0][0]=0;
+            state='e';
+            break;
+        case 'e':
+            Dstate[0][1]=0;
+            Dstate[0][0]=-1;
+            state='n';
+            break;
+        case 'w':
+            Dstate[0][1]=0;
+            Dstate[0][0]=1;
+            state='s';
+            break;
+        }
+    }
+}
+int move(int n1,int x1){
+    while(n1>0){
+        i+=Dstate[0][0];
+        j+=Dstate[0][1];
+            floor[i][j]=x1;
+            n1--;
+            }
+            return 0;
+    }
+int print(){//该函数打印目前的状态
+    for(int i1=0;i1<50;i1++){
+        for(int j1=0;j1<50;j1++){
+            if(floor[i1][j1]==0) printf("0");
+            else printf("*");
+        } puts("");
+    }}

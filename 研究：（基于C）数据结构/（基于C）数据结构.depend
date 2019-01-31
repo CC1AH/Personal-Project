@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1548831744 source:d:\codeblocks\（基于c）数据结构\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Binary_tree.h"
+
+1548830531 d:\codeblocks\（基于c）数据结构\queue_list.h
+
+1548831644 d:\codeblocks\（基于c）数据结构\binary_tree.h
+
