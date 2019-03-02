@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1551504590 source:d:\codeblocks\hugeint\main.cpp
+	<iostream>
+	<string>
+	<stdlib.h>
+	"HugeInt.h"
+
+1551504782 d:\codeblocks\hugeint\hugeint.h
+	<string>
+	<iostream>
+
+1551504467 source:d:\codeblocks\hugeint\hugeint.cpp
+	"HugeInt.h"
+	<string>
+	<cstring>
+	<algorithm>
+
