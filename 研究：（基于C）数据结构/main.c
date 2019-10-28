@@ -4,10 +4,10 @@
 #include <stdlib.h>
 //#include "Stack_list.h"
 //#include "Binary_tree.h"
-//#include "Linked_list.h"
-#include "Queue_list.h"
+#include "Linked_list.h"
+//#include "Queue_list.h"
 //注意：一次包含一个头文件进行测试
-
+#define LINKED_LIST_H_INCLUDED
 #ifdef LINKED_LIST_H_INCLUDED
 main(){
     create();

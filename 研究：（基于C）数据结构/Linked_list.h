@@ -14,6 +14,7 @@ typedef struct node2* nptr2;
 typedef struct node node;
 typedef struct node* nptr;
 
+//空定义一定要有
 nptr pHead=NULL;
 nptr pNode=NULL;
 nptr pNow=NULL;
@@ -21,24 +22,33 @@ nptr phead2=NULL;
 nptr pnode2=NULL;
 nptr pnow2=NULL;
 
+//创建一个链表
 void create(){
     char n;
     printf("请输入想要存入的正数，输入0以停止");
     scanf("%d",&n);
     while(n!=0){
+
+        //创建新节点的数据域和指针域
         pNode = (nptr)malloc(sizeof(node));
+
+        //在malloc有成效的前提下进行创建
         if(pNode!=NULL){
         pNode->ptr=NULL;
         pNode->num=n;
 
+        //如果头为空 定义头部。
         if(pHead==NULL){
             pHead=pNode;
-            pNow=pNode;
         }
+        //否则插到上一个节点的尾部
         else{
             pNow->ptr=pNode;
-            pNow=pNode;
         }
+
+        //将新节点定义到链表
+        pNow=pNode;
+
         scanf("%d",&n);
         }
     }
@@ -46,11 +56,10 @@ void create(){
 
 void print(){
     nptr temp=pHead;
-    while(pHead!=NULL){
-    printf("%d\n",pHead->num);
-    pHead=pHead->ptr;
-    }
-    pHead=temp;//注意暂存步骤，关键
+    while(temp!=NULL){
+    printf("%d\n",temp->num);
+    temp=temp->ptr;
+    }//注意暂存步骤，关键，否则直接操作以后就用不了pHead了
 }
 
 void delet(){
@@ -58,6 +67,7 @@ void delet(){
     printf("请输入你想删除的数字:");
     scanf("%d",&n);
 
+    //找到目标节点temp 上一个节点记为last
     nptr temp,last;
     temp = pHead;
     while(temp->num!=n&&temp->ptr!=NULL){
@@ -65,23 +75,28 @@ void delet(){
         temp=temp->ptr;
     }
 
+    //找到了n的情况
     if(temp->num==n){
+        //头节点直接改变为后继
         if(temp==pHead){
             pHead = pHead->ptr ;
-            free(temp);
         }
+        //否则上一个节点的前驱指向本节点的后继
         else{
             last->ptr=temp->ptr;
-            free(temp);
         }
+        //释放本节点空间
+        free(temp);
     }
 
+    //到达尾部还没有的情况
     else{
         printf("None Finding");
     }
 }
 
 void Insert(){
+    //确定插入的数字和插入的位置
     printf("请输入插入数字：");
     nptr newnode = (nptr)malloc(sizeof(node));
     scanf("%d",&(newnode->num));
@@ -89,6 +104,8 @@ void Insert(){
     printf("请输入要插入的数字在第几个数字之前");
     int m;
     scanf("%d",&m);
+
+    //找到目标节点aim 上一个节点记为last 插入节点应该在两者之间 last-aim
     nptr aim,last;
     aim=pHead;
      int i=1;
@@ -96,11 +113,14 @@ void Insert(){
             last=aim;
             aim=aim->ptr;
             i++;
-        }
+    }
+
+    //头节点直接插到前面 并且变成头节点
     if(1==m){
           newnode->ptr=pHead;
           pHead=newnode;
     }
+    //否则插到last和aim之间
     else{
        last->ptr=newnode;
        newnode->ptr=aim;

@@ -15,3 +15,19 @@
 	<cstring>
 	<algorithm>
 
+1551504771 source:d:\res\res-personal project\重用类：正大整数加减乘除\hugeint.cpp
+	"HugeInt.h"
+	<string>
+	<cstring>
+	<algorithm>
+
+1551504782 d:\res\res-personal project\重用类：正大整数加减乘除\hugeint.h
+	<string>
+	<iostream>
+
+1551504590 source:d:\res\res-personal project\重用类：正大整数加减乘除\main.cpp
+	<iostream>
+	<string>
+	<stdlib.h>
+	"HugeInt.h"
+
