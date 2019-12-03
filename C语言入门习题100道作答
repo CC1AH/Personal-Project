@@ -1,0 +1,2375 @@
+//C语言入门算法题 100道 自己做的答案 比较经典的会给出名字 其他见原题啦
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include<windows.h>
+#include<conio.h>
+#include<time.h>
+#include<dos.h>
+#include<string.h>
+#include <ctype.h>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+//1.
+/*int main(int argc, char *argv[]) {
+		int i;int j;int k;
+	for(i=1;i<5;i++){
+		for(j=1;j<5;j++){
+			for(k=1;k<5;k++){
+				if(i!=j&&j!=k&&i!=k)
+				printf("%d%d%d\n",i,j,k);
+			}
+		}
+	}
+	return 0;
+}
+*/
+
+//2.
+//a.注意分段函数时存储数据的方法 
+/*int main(){
+	long I;
+	long bonus[5];
+	long bonu;
+	bonus[0]=100000*.1;
+	bonus[1]=bonus[0]+100000*.075;
+	bonus[2]=bonus[1]+200000*.05;
+	bonus[3]=bonus[2]+200000*.03;
+	bonus[4]=bonus[3]+400000*.015;
+	puts("please input the benifit"); 
+	scanf("%ld",&I);
+	if(I<=100000)
+		bonu=I*.1;
+	else if(I<=200000)
+		bonu=bonus[0]+(I-100000)*.075;
+	else if(I<=400000)
+		bonu=bonus[1]+(I-200000)*.05;
+	else if(I<=600000)
+		bonu=bonus[2]+(I-400000)*.03;
+	else if(I<=1000000)
+		bonu=bonus[3]+(I-600000)*.015;
+	else 
+		bonu=bonus[4]+(I-1000000)*.01;
+		printf("%ld",bonu);
+}
+*/
+
+//3.
+//a.巧妙利用隐式类型转换解决问题；
+//b.如果一个数的平方根取整数后（定义了整数X）的平方等于该数，则其为完全平方数 
+/*int main(){
+	long int i;
+	for(i=1;i<100000;i++){
+	long int i1=i+100;
+	int x=sqrt(i1);
+	long int i2=i1+168;
+	int y=sqrt(i2);
+	if(x*x==i1&&y*y==i2)
+		printf("%ld\n",i);	
+
+}} 
+*/
+
+//4.计算这是一年中的第几天
+//a.闰年是能被四整除但不能被100整除的年份,闰年2月29天。否则28天。 
+/*int main(){
+	int sum=0;
+	int month[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+	int mon,day,yea;
+	puts("please input the year");
+	scanf("%d",&yea);
+	puts("please input the month");
+	scanf("%d",&mon);
+	puts("please input the date");
+	scanf("%d",&day);
+ 	
+ 	int i;
+ 	for(i=0;i<mon;i++){
+ 		sum+=month[i];
+	 } 
+	 sum+=day; 
+	 if(yea%4==0&&yea%100!=0)
+	 sum++;
+	 printf("the day is the %dth day in this year",sum);	
+}
+*/
+
+//5.
+//a.程序要求改为不间断的从用户处得非负数，直到用户输入-1，排序。
+//b.for(i=0;i<n-pass;i++) 注意中间那个不要记错 
+/*int main(){
+	int a[10000];
+	int n=0;
+	int p;
+	
+	while(n<=10000){
+		scanf("%d",&p);
+		if(p!=-1){
+		a[n]=p;
+		n++;}
+		else
+		break;
+	}
+	int pass;
+	int i;
+	for(pass=1;pass<=n-1;pass++){
+		for(i=0;i<n-pass;i++){
+			if(a[i]>a[i+1]){
+				int hold;
+				hold=a[i];
+				a[i]=a[i+1];
+				a[i+1]=hold;
+			}
+		} 
+	}
+	
+	for(i=0;i<n;i++)
+	printf("%d\n",a[i]);
+} 
+*/
+
+//6.
+/*void c(){
+	int i;
+	printf("  ********\n");
+	for(i=0;i<5;i++)
+	printf(" *\n");
+	printf("  ********");
+	return;
+}
+int main(){
+	c();
+}*/
+
+//7.
+/*int main(){
+int a,b;
+puts("please input ASCII code");
+scanf("%d",&b);
+puts("please input ASCII code");
+scanf("%d",&a);
+printf("%c%c%c%c%c\n",b,a,a,a,b);
+printf("%c%c%c%c%c\n",a,b,a,b,a);
+printf("%c%c%c%c%c\n",a,a,b,a,a);
+printf("%c%c%c%c%c\n",a,b,b,b,a);
+printf("%c%c%c%c%c\n",b,a,b,a,b);
+}
+*/
+
+//8.打印9*9乘法表
+/*int main(){
+	int i,j;
+	for (i=1;i<=9;i++){
+		for (j=1;j<=9;j++){
+			printf("%d*%d=%2d ",i,j,i*j);
+		}
+		puts("");
+	}
+}
+*/
+
+//9.打印棋盘
+/*int main(){
+int i,j;
+for (i=0;i<8;i++){
+	for(j=0;j<8;j++){
+		if((i+j)%2==0)
+		printf("%c",1);
+		else 
+		printf("%c",2);
+	}
+	puts("");}}
+*/
+
+//10.
+/*void print(){
+	int i,j;
+	for(i=1;i<=10;i++){
+		for(j=0;j<i;j++)
+		printf("%c",21);
+	if(i==1)
+	printf("%c",1);
+	if(i==9)
+	printf("%c",1);
+	puts("");
+	}
+}
+int main(){
+	print();}
+*/
+
+//11.循环打印斐波那契数列
+/*int main(){
+	int f1=1;
+	int f2=1;
+	int i;
+	int hold；
+	printf("   1");
+	
+	for(i=0;i<10;i++){
+	printf("%4d",f2);
+	hold=f1;
+	f1=f2;
+	f2=f2+hold;
+	}
+}
+*/
+
+//12.
+//a.flag 变量声明的位置：它在for内部声明，每次都会被重新初始化为0.
+/*int main(){
+int n;
+int counters=0;
+for (n=101;n<=200;n++){
+	int flag=0;
+	int x=sqrt(n+1);
+	int i;
+	for(i=2;i<=x;i++){
+	    if(n%i==0){
+		flag=1;	
+		break;
+		}
+	}
+	if(flag==0){
+	counters++;
+	printf("%d\n",n);
+	}
+}
+printf("the result is %d",counters);}
+*/
+
+//13.
+//a.注意分解数字的方法 \
+b.注意/与%运算优先级相同 
+/*int main(){
+int n,n1,n2,n3;
+for(n=100;n<=999;n++){
+	n1=n/100;
+	n2=n/10%10;
+	n3=n%10;
+	if(n==n1*n1*n1+n2*n2*n2+n3*n3*n3)
+	printf("%d\n",n);
+}}
+*/
+
+//14.
+//a.注意for 循环打出continue后循环变量先加一再进行条件判断 
+/*int main(){
+	long int a;
+    scanf("%ld",&a);
+	printf("%ld=1",a);
+	
+	int i;
+	for(i=2;i<=a;i++){
+			if(a%i==0){
+			printf("*%d",i);
+			a=a/i;	
+			}
+			if(a%i==0){
+			    i--;
+				continue;
+			}
+	}
+}*/
+
+//15.
+/*int main(){
+	int score;
+	scanf("%d",&score);
+	printf(score>=90?"A":((score>=60)?"B":"C"));
+}
+*/
+
+//16.求最大公约数's 2 method
+//a.最大公约数乘以最小公倍数等于两数乘积 (由素因数分解定理这是显然的)
+/*method 1 辗转相除
+int main(){
+int a,b,r;
+scanf("%d,%d",&a,&b);
+   if(a<b) {r=a;a=b;b=r;}
+   while(r!=0){
+    r=a%b;a=b;b=r;
+   }
+  printf("%d",a);}*/
+
+ /*method 2 更相减损
+  int f(int a,int b){
+  if(a==b) return a;
+  else if(a>b) return f(a-b,b);
+  else return f(b-a,a);
+  }
+  int main(){
+  printf("%d",f(34,85));
+  }*/
+
+//17.\
+a.注意记录输入的字符的方法 一开始犯的错误是c=getchar()外面没加括号，导致无论如何都只有other加值 
+//b.字符与整型之间可以等价转换 
+/*int main(){
+	char c;
+	int letter=0;
+	int space=0;
+	int num=0;
+	int other=0;
+	while( (c=getchar()) !='\n'){
+		if(((c>='a')&&(c<='z'))||((c>='A')&&(c<='Z')))
+		letter++;
+		else if(c==' ')
+		space++;
+		else if((c>='0')&&(c<='9'))
+		num++;
+		else
+		other++;
+	}
+	printf("letter:%d  sapce:%d  num:%d  other:%d",letter,space,num,other);
+}
+*/
+
+//18. 
+//b.注意每次plus变量的再声明 
+//c.看看标准答案的方法，注意变量的复用与弃用（可以改变了的量）(可读性好意味着费内存) 
+/*int power(int a,int j){
+	if(j==0)
+		return 1;
+	else if(j==1)
+		return a;
+	else 
+		return a*power(a,j-1);
+}
+int main(){
+	 int a,n;
+	 scanf("%d",&n);
+	 scanf("%d",&a); 
+	 int i,j;
+	 int sum=0;
+	 int plus;
+	 for(i=1;i<=n;i++){
+	 	 
+		 plus=0;
+		 for (j=0;j<i;j++){
+	 		plus+=a*(power(10,j));
+		 }
+		 
+	 sum+=plus;	 	
+	 }
+	 printf("%d",sum);
+}
+*/
+
+//19.
+/*int main(){
+	int i;
+	int j;
+	int sum; 
+	for(i=1;i<=1000;i++){
+		sum=0;
+		for(j=1;j<i;j++){
+			if(i%j==0)
+				sum+=j;
+		}
+		if(sum==i) printf("%d\n",i);
+	}
+}*/
+
+//20.
+/*int main(){
+	double height=100.0;
+	double sum=height;
+	int i;
+	int n=10;
+	for(i=2;i<=n;i++){
+		height/=2;
+		sum+=height*2;
+	}
+	printf("%.2f\n",height);
+	printf("%.2f",sum);	
+}
+*/
+
+//21.\
+极易错写为for(i=1;i<=10;i++){,注意 直译 。 
+/*int main(){
+	int left=1;
+	int i;
+	for(i=9;i>=1;i--){      //or :for(i=0;i<9;i++){
+	left=(left+1)*2;	
+	}
+	printf("%d",left);
+}
+*/
+
+//22.  
+//a.该答案中，if中套if可以省去并列运算符的麻烦
+/*int main(){
+	char i,j,k;
+	for (i='x';i<='z';i++){
+		for(j='x';j<='z';j++){
+			if(i!=j){//a,b对手不能相同 
+				for(k='x';k<='z';k++){
+					if(i!=k&&j!=k){//c与a，b对手不能相同 
+						if(i!='x'&&k!='x'&&k!='z')
+						printf("the order is a---%c b---%c c---%c\n",i,j,k);
+					}
+				}
+			}
+		}
+	}	
+}
+*/
+
+//23.打印菱形星
+/*int main(){
+	int n;
+	scanf("%d",&n);
+	int m=n/2+1;
+	int i;
+	int j;
+	for(i=1;i<=m;i++){
+		for(j=0;j<2*i-1;j++){
+		printf("*");	
+		}
+		puts("");
+	}
+	for(i=m-1;i>0;i--){
+		for(j=0;j<2*i-1;j++){
+		printf("*");	
+		}
+		puts("");
+	}}
+*/
+
+//24.递归求斐波那契数列
+/*int fi(int a){
+	if(a==0||a==1)
+	 return 1;
+	else
+	 return fi(a-1)+fi(a-2);
+}
+int main(){
+	double sum=0;
+	int i;
+	
+	for(i=1;i<=20;i++){
+		sum+=(double)fi(i+1)/fi(i);
+	}
+	
+	printf("%.4f",sum);
+}
+*/
+
+//25.
+/*int main(){
+	int i,j;
+	int sum=0;
+	for(i=1;i<=20;i++){
+		int fac=1;
+		for (j=1;j<=i;j++){
+			fac*=j;
+		}
+		sum+=fac;	
+	}
+	printf("%d",sum);
+}
+*/
+
+//26.递归求阶乘
+/*int factorial(int a){
+	if(a==0||a==1)
+	   return 1;
+	else{
+		return a*factorial(a-1);
+	//注意调用的更新性，这个算法正确，切忌再定义变量了哈 
+	} 
+}
+int main(){
+	int a=6;
+	printf("%d",factorial(a));
+}
+*/
+
+//27.回文打印
+// 最早调用，最后打出 
+/*void parlin(int n){
+	char c=getchar();
+	if (n==1){
+		puts("");
+		putchar(c);}	
+	else{
+		parlin(n-1);
+		putchar(c); }
+}main(){
+ 	int i=5;
+ 	parlin(i);
+}
+*/
+
+//28.
+/*int age(int n){
+	if(n==1)
+		return 10;
+	else
+		return age(n-1)+2;
+}
+
+main(){
+	printf("%d",age(5));
+}
+*/
+
+//29.
+/*main(){
+	int n,N;
+	printf("please input an unsigned number you like:\n");
+	scanf("%d",&n);
+	
+	N=n;
+	int co=0;
+	while(n>=1){
+		co++;
+		n /= 10;
+	}
+	printf("the column is %d\n",co);
+	
+	int a[6];
+	int hold=N;
+	int i,j;
+	for(i=0;i<co;i++){
+	  N=hold;
+		 for(j=1;j<co-i;j++)
+		 N/=10;
+	  a[i]=N%10;
+	}
+	
+	for(i=co-1;i>=0;i--){
+		printf("%d",a[i]);
+}}
+*/
+
+//30.
+/*main(){
+	int n,hold,i,j;
+	int a[5];
+	scanf("%d",&n);//must 5 cos
+
+	hold=n;
+	for(i=0;i<5;i++)
+	{
+		n=hold;
+	  for(j=1;j<5-i;j++)
+	    n/=10;
+	    a[i]=n%10;
+	}
+	if(a[4]==a[0]&&a[3]==a[1])
+	 printf("it is a reverse number");
+	}
+*/
+
+//31.
+/*int main(){
+	char c=getchar();
+	switch(c){
+		case 'm':
+			puts("It's Monday");
+			break;
+		case 'w':
+			puts("It's Wednesday");
+			break;
+		case 'f':
+			puts("It's Friday");
+			break;
+		case 't':
+			puts("I cannot decide now, please give me the second");
+			char t2=getchar();//消除回车带来的重复；或者case'\n':后提示重输 
+			char t=getchar();
+			if(t=='h')
+				puts("It's Thursday");
+			else if(t=='u')
+				puts("It's Tuesday");
+			else 
+				puts("error C-0894");
+			break;
+		case 's':
+			puts("I cannot decide now, please give me the second");
+			char t3=getchar();
+			char t1=getchar();
+			if(t1=='a')
+				puts("It's Saturday");
+			else if(t1=='u')
+				puts("It's Sunday");
+			else 
+				puts("error ");
+			break;
+		default:
+			puts("error ");
+	}
+}
+*/
+
+//程序32,33,35在TC环境下运型
+//32.
+/*int main(){
+	int color;
+	for (color=0;color<8;color++){
+		textbackground(color);
+		cprintf("this color is %d\r\n",color);
+		cprintf("press any key to continue\r\n");
+		getch();
+	}
+}
+*/
+
+//33.
+/*int main(){ 
+	clscr();
+	textbackground(2);
+	gotoxy(1,5);
+	cprintf("output at row 1 column 5\n");
+	textbackground(3);
+	gotoxy(20,10);
+	cprintf("output at row 10 column 20\n");
+	return 0;
+}
+*/
+
+//34.
+/*void ti(){
+	printf("hello world\n");
+}
+void tin(int n){
+	int i;
+	for(i=1;i<=n;i++){
+			ti();
+	}
+}
+int main(){
+	tin(3);
+}
+*/
+
+//35.
+/*int main(){
+	int color;
+	for(color=1;color<16;color++){
+		textcolor(color);
+		cprintf("the color is %d\r\n");
+	}
+	textcolor(128+15);
+		cprintf("the color is blinking\r\n");
+}
+*/
+
+//36.统计素数
+/*
+int common(int n){
+	int i;
+	int x;
+	x=sqrt(n+1);
+	for(i=2;i<=x;i++){
+		if(n%i==0)
+			return 0;
+	}
+	return 1;
+}
+int main(){
+	int i;
+	for(i=2;i<=100;i++){
+		if(common(i)==1)
+			printf("%d\t",i);
+	}
+}
+*/
+
+//37.
+/*void main(){
+	int a[10]={10,8,7,5,34,6,7,8,1,3};
+	int pass,j;
+	for(pass=0;pass<9;pass++){
+		for(j=0;j<9-pass;j++){
+			if(a[j]>a[j+1]){
+				int hold;
+				hold=a[j];
+				a[j]=a[j+1];
+				a[j+1]=hold;
+				}
+		}
+	}
+	for(j=0;j<10;j++)
+	printf("%d\n",a[j]);
+}
+*/
+
+//38.
+/*main(){
+	double a[3][3];
+	double sum=0;
+	int i,j;
+		for(i=0;i<3;i++){
+			printf("no.%d\t",i);
+			for(j=0;j<3;j++){
+				scanf("%lf",&a[i][j]);
+			}
+		}
+	for(i=0;i<3;i++)
+	sum+=a[i][i];
+	printf("%lf",sum);
+}
+*/
+
+//39.
+//a.注意break在括号内，犯了几次了 
+/*main(){
+	int a[11]={1,2,3,4,5,7,8,9,10,11,12};
+	int b;
+	scanf("%d",&b);
+	
+	int i;
+	int counters=11;
+	for(i=0;i<11;i++){
+		if(a[i]>b){
+			counters=i;
+			break;
+		}
+	}
+	
+	int c[12];
+	for(i=0;i<counters;i++){
+		c[i]=a[i];
+	}
+	c[counters]=b;
+	for(i=counters+1;i<12;i++){
+		c[i]=a[i-1];
+	}
+	for(i=0;i<12;i++)
+	printf("%d\n",c[i]);
+	
+}
+*/
+
+//40.
+/*
+main(){
+int c[12]={1,2,3,4,5,6,7,8,9,10,11,12};
+int i;
+for(i=11;i>=0;i--)
+	printf("%d\n",c[i]);}
+*/
+	
+//41.static auto 
+/*int num;.
+void varfunc(){
+	int var=0;
+	static int static_var=0;
+	printf("var is %d\n",var);
+	printf("Sval is %d\n",static_var);
+	var++;
+	static_var++;
+}
+main (){
+	varfunc();
+	varfunc();
+	int i;
+	num=2;
+	for (i=0;i<3;i++){
+		printf("the number si %d\n",num);
+		num++;
+	}
+	auto int anum=2;
+	for (i=0;i<3;i++){
+		printf("the anumber si %d\n",anum);
+		anum++;
+	}
+	static int bnum=2;
+	for (i=0;i<3;i++){
+		printf("the bnumber si %d\n",bnum);
+		bnum++;
+	}
+}
+*/
+
+//42. 转换为二进制
+/*for(int i=1;i<257;i++){
+       int p=1,y=0,reminder,x=i;
+     while(1)
+        {
+        reminder =x%2;
+        x/=2;
+        y+=reminder*p;
+        p*=10;
+         if(x<2){
+            y+=x*p;
+            break;
+         }
+     } if(i%4!=0)
+     printf("%4d  %8d\t",i,y);
+     else
+    printf("%4d  %8d\n",i,y);}
+
+//43. 找毕达哥拉斯数
+/*int c=1;
+   for(int i=1;i<=500;i++){
+    for(int j=1;j<=500;j++){
+      for(int k=1;k<=500;k++){
+        if(k*k+j*j==i*i&&k<j)
+            {printf("%d %d %d %d\n",c,k,j,i);
+            c++;}
+      }
+    }}*/
+
+//44.register
+/*int a,b,c;
+void add(){
+	int a;
+	a=3;
+	c=a+b;
+}
+main(){
+	a=b=4;
+	add();
+	printf("%d",c);
+	
+	register int i;//register处于CPU寄存器中，不能用&获取地址，只有动态的局部变量和形参可以被如此定义。 
+	int tmp=0;
+	for (i=1;i<=100;i++){
+		tmp+=i;
+		printf("%d\n",tmp);
+	}
+}
+*/
+
+//45. 向上取整
+/*
+double leave(double x);
+int main()
+{
+    double x;
+   scanf("%lf",&x);
+   printf("%.0f",leave(x));
+     system("pause");
+    return 0;
+}
+double leave(double x){
+    return floor(x+.5);
+}*/
+
+//46. rand
+/*void main(){
+printf("%d\n",srand(time(NULL))%2+1);
+printf("%d\n",srand(time(NULL))%100+1);
+printf("%d\n",srand(time(NULL))%9);
+printf("%d\n",srand(time(NULL))%113+1000);
+printf("%d\n",srand(time(NULL))%3-1);
+printf("%d\n",srand(time(NULL))%15-3);
+}*/
+
+//47. 
+/*void StarSquare(int x);
+
+int main(){
+    int x;
+    scanf("%d",&x);
+    StarSquare(x);
+    return 0;
+}
+void StarSquare(int x){
+    for(int i=0;i<x;i++){
+        for(int j=0;j<x;j++)
+        printf("%@");
+    printf("\n");
+        }
+}*/
+
+//48.
+/*void UnknownSquare(int x,char y);
+
+int main(){
+    int x;char y;
+    scanf("%d%c",&x,&y);
+    UnknownSquare(x,y);
+    return 0;
+}
+void UnknownSquare(int x,char y){
+    for(int i=0;i<x;i++){
+        for(int j=0;j<x;j++)
+        printf("%c",y);
+    printf("\n");
+        }
+}*/
+
+//49.
+/*int toQualityPoints(double grades);
+int main(){
+    double grades;
+    scanf("%lf",&grades);
+    printf("the rank in order is %d\n",toQualityPoints(grades));
+
+}
+int toQualityPoints(double grades){
+if(grades>100)
+    return 5;
+else if (grades>=90)
+    return 4;
+else if(grades>=80)
+    return 3;
+else if(grades>=70)
+    return 2;
+else if(grades>=60)
+    return 1;
+else
+    return 0;
+}*/
+
+//50. 猜数游戏
+/*void Guess(int intput,int given);
+int main(void){
+   int given,input;
+   int choice;
+        puts("I have a number between 1 and 1000.");
+        puts("Can you guess my number?");
+        puts("Please type your first guess:");
+        for(;;){
+            Guess(input,given);
+            scanf("%d",&choice);
+            if(choice == 0)
+                break;
+            else {
+                    puts("Okay,now let's start again.");
+                continue;
+            }//end else
+        } //end for
+}//end main
+void Guess(int input,int given){
+srand(time(NULL));
+ given = rand ()%1000+1;
+ int counter=1;
+for(;;){
+   scanf("%d",&input);
+    if (input>given) puts("TOO HIGH. TRY AGAIN.");
+    else if (input<given) puts("TOO LOW. TRY AGAIN.");
+    else{
+            puts("EXCELLENT!");
+            break;
+        }//end else
+        counter++;
+    }//end for;
+    printf("the times of your guess this round is %d\n",counter);
+       if(counter<10)
+        printf("Either you know the secret or you got lucky.");
+       if(counter==10)
+        printf("Ahah! You know the secret.");
+       if(counter>10)
+        printf("You should be able to do better.");
+    printf("\nWOULD YOU LIKE TO TRY AGAIN?\n(1 or other integers for yes and 0 for no)");
+}//end Guess;*/
+
+//51.汉诺塔
+/*
+void hanoi(int n,int i,int c,int a){
+   if(n==1)
+       printf("%d---%d\n",i,a);
+   else
+      {
+        hanoi(n-1,i,a,c);
+        printf("%d---%d\n",i,a);
+        hanoi(n-1,c,i,a);
+      }
+}
+int main(){
+    int i,a,c,n;
+        puts("请输入塔的层数：");
+            scanf("%d",&n);//提示用户输入塔的层数number
+        puts("请输入塔的起始位置号：");
+            scanf("%d",&i);//提示用户输入塔的起始位置initial
+        puts("请输入塔的暂存位置号：");
+            scanf("%d",&c);//提示用户输入塔的暂存位置contemporary
+        puts("请输入塔的终止位置号：");
+            scanf("%d",&a);//提示用户输入塔的终止位置aim
+        hanoi(n,i,c,a);
+    return 0;
+}*/
+
+//52. 完美数
+/*
+void isperfect(int a){
+    int i,sum=0;
+    for (i=1;i<a;i++){
+        if(a%i==0){
+            sum+=i;
+            printf("%d\t",i);
+
+        }
+    } if(a==sum)
+    printf("the numbers you need is %d\n",sum);
+}
+int main(){
+    int a;
+    scanf("%d",&a);
+    isperfect(a);
+    return 0;
+}*/
+
+//53.if实验
+/*int x,y;
+scanf("%d%d",&x,&y);
+if(x<10)
+    if(y>10)
+    puts("*****");
+else
+    puts("#####");//vital: an "else" is always connected with the last "if"
+    puts("$$$$$");*/
+/*if(x<10){
+    if (y>10)
+    puts("*****");
+        }
+else{
+    puts("#####");
+    puts("$$$$$");*/
+
+//54.计算均值
+/*printf("Enter three different Integers,use space to split them,use enter to calculate: \n");
+int a,b,c,d,s,i;
+scanf("%d %d %d",&a,&b,&c);
+d = a+b+c;
+printf("Sum is %d\n",d);
+printf("Average is %.2lf\n",(double)d/3);
+printf("Product is %d\n",a*b*c);
+s = a;i = a;
+if(b>s) s=b;if(c>s) s=c;
+if(b<i) i=b;if(c<i) i=c;
+printf("Smallest is %d\n",i);
+printf("Largest is %d\n",s);*/
+
+//55. 计算最值
+/*printf("Enter five different Integers,use enter to split them,use enter to calculate: \n");
+  int a[5],i,s,j;
+  for(j=0;j<5;j++)
+    scanf("%d",&a[j]);
+  i=s=a[0];
+  for(j=0;j<5;j++)
+  {
+      if(a[j]>s) s=a[j];if(a[j]<i) i=a[j];
+  }
+  printf("the maximum is %d,and the minimum is %d",s,i);
+*/
+
+//56.组成三角形？
+/*int x,y,z;scanf("%d%d%d",&x,&y,&z);
+if (x+y<=z||x+z<=y||y+z<=x)
+    puts("the numbers cannot compose a triangle");
+    else
+    puts("the number can compose a triangle");*/
+
+//57.组成RT三角形？
+/*int x,y,z;scanf("%d%d%d",&x,&y,&z);
+if(x*x+y*y==z*z||z*z+y*y==x*x||x*x+z*z==y*y)
+    puts("the numbers can compose a right triangle");
+    else
+    puts("the numbers cannot compose a right triangle");*/
+
+//58.
+ /*double principal = 1000;
+  double  rate;
+  for(;;){
+        puts("Please print your rate:");
+        scanf("%lf",&rate);
+         printf("%4s%21s\n","Year","Amount of deposit");
+     for (unsigned int year = 1;year<=10;year++)
+     {
+         double amount = principal*pow(1.0+rate,year);
+         printf("%4u%21.2f\n",year,amount);
+     }
+  }*/
+
+//59.
+/*int n;
+    scanf("%d",&n);
+   for(int m=1;m<=n;m++){
+    int i;double sum=0;
+   for(i=1;i<=2*m-1;i+=2){
+        if(i%4==1)
+   sum+=(double)4/i;
+        else
+   sum+=(double)-4/i;
+}printf("%d\t%f\n",m,sum);*/
+
+//60.打印奇阶幻方
+/*void X_step(int x){
+    unsigned int a[x][x];
+        for(int i=0;i<x;i++){
+            for(int j=0;j<x;j++){
+               a[i][j]=0;
+            }}
+if(x%2==1){
+    int r=0;
+    int c=x/2;
+    a[r][c]=1;
+    for(int k=2;k<=x*x;k++){
+        if((r==0)&&(c==x-1)){
+            r++;
+        a[r][c]=k;
+        continue;}
+
+        int holdr,holdc;
+        holdr=r;
+        holdc=c;
+
+        r=(r-1+x)%x;
+        c=(c+1)%x;//注意控制范围
+
+        if(a[r][c]!=0){
+          r=holdr+1;
+          c=holdc;
+          a[r][c]=k;
+        }
+        else
+            a[r][c]=k;
+    }
+        for(int i=0;i<x;i++){
+            for(int j=0;j<x;j++){
+                 printf("%d\t",a[i][j]);
+            }printf("\n");}
+            }
+}*/
+
+//61.打印PASCAL三角形
+/*main(){
+	int a[10][10];
+	int i,j;
+	for(i=0;i<10;i++){
+		a[i][0]=1;
+		for (j=1;j<10;j++){
+			if(j>i)
+			a[i][j]=0;
+			else	
+	        a[i][j]=a[i-1][j]+a[i-1][j-1];
+		}}
+	for(i=0;i<10;i++){
+		for (j=0;j<=i;j++){
+			printf("%d ",a[i][j]);
+		}
+		puts("");
+	}}
+*/
+
+//62.判断回文
+int is_parlin(char str[],int a,int b){
+        if(str[a]!=str[b])
+            return 0;
+        else if(a==b||((a+1)==b&&str[a+1]==str[b]))
+            return 1;
+        else if(str[a]==str[b])
+            return parlin(str,a+1,b-1);
+         }
+/*void test(){
+     int p;
+     int t;
+     char str[800];
+     puts("please input the string");
+     gets(str);//为了消除回车带来的重复
+     gets(str);
+     t=strlen(str);
+     if(t==0)
+            printf("yes");
+     else{
+        p=is_parlin(str,0,t-1);
+        if(p==1) printf("yes");
+        else if(p==0) printf("no");
+     }
+}
+*/
+
+void t63_64_65();//中位数 众数及 平均数计算
+void mean(const unsigned int answer[]);
+void median(unsigned int answer[]);
+void mode(unsigned int freq[],unsigned const int answer[]);
+void bubblesort(unsigned int a[]);
+void  t63_64_65(){
+    unsigned int freq[10]={0};
+    unsigned int response[SIZE]={1,2,3,4,8,8,8,8,9,9,9,9};
+    mean(response);
+    median(response);
+    mode(freq,response);
+}
+void mean(const unsigned int answer[]){
+    unsigned int total=0;
+        for(size_t j=0;j<SIZE;j++)
+            total+=answer[j];
+        printf("the average you need is %.4f\n",(double)total/SIZE);
+}
+void median(unsigned int answer[]){
+    bubblesort(answer);
+    printf("the median you need is %.4f\n",(double)(answer[SIZE/2]+answer[SIZE/2+1])/2);
+}
+void bubblesort(unsigned int a[]){
+for(unsigned int n=1;n<SIZE;n++){
+        for(size_t i=0;i<SIZE-1;i++){
+            if(a[i]>a[i+1]) {
+           int hold=a[i];a[i]=a[i+1];a[i+1]=hold; }}}}
+void mode(unsigned int freq[],unsigned const int answer[]){
+
+    for(size_t j=0;j<SIZE;j++)
+    freq[answer[j]]++;
+    int maxN=0;
+    for(size_t r=1;r<=9;r++){
+        if(freq[r]>maxN) maxN=freq[r];
+    }
+    puts("the number(s) that can meet you need is:");
+    for(size_t r=1;r<=9;r++){
+        if(freq[r]==maxN) printf("%d\t",r);
+    }
+    printf("whose frequency is %d",maxN);
+}
+
+//66.投两次骰子的概率分析
+main(){
+    int a[13]={0};
+    srand(time(NULL));
+    for(int j=0;j<36000;j++)
+    {
+    int FirstRoll = rand()%6+1;
+    int SecondRoll =rand()%6+1;
+    int total =FirstRoll+SecondRoll;
+    for(int i=2;i<=12;i++){
+        if(i==total) a[i]++;
+        }
+    }
+    for(int i=2;i<=12;i++)
+        printf("the frequency of appearance for num %d is %d\t",i,a[i]);
+}
+	
+//67.
+/*int main(){
+    int a[6]={2,3,4,1,8,7};
+    int max,min;
+        max=0;min=0;
+
+	for(int k=0;k<6;k++){
+		if(a[k]>a[max])  max=k;
+		if(a[k]<a[min])  min=k;
+	}
+        int tmp;
+        tmp=a[max];a[max]=a[0];a[0]=tmp;
+        tmp=a[min];a[min]=a[5];a[5]=tmp;
+    for(int i=0;i<6;i++)
+    printf("%d",a[i]);
+}*/
+
+//68.
+/*int main(){
+    int a[10]={1,2,3,4,5,6,7,8,9,10};
+    int m;
+    scanf("%d",&m);
+    m=10-m;
+    for(int i=10-m;i<10;i++)
+    printf("%d",a[i]);
+    for(int i=0;i<10-m;i++)
+    printf("%d",a[i]);
+}*/
+
+//69.编号n人报数三倍退出最后剩谁
+//在算法工程中，推荐法二，使用数学运算简化。但现在推荐法一
+/*int main(){
+ 1.int a[100];
+ int i,n,p=0,q;
+ printf("please input");
+ scanf("%d",&n);
+ q=n;
+ for(i=0;i<n;i++) a[i]=i+1;
+ for(i=0;;i++){
+    if(i==n) i=0;
+    if(0!=a[i]) p++;
+    else continue;
+    if(p%3==0){
+        a[i]=0;
+        q--;}
+    if(q==1)
+        break;}
+    for(i=0;i<n;i++){
+        if(a[i]!=0)
+            printf("%d",a[i]);
+    }
+ }*//*2.
+ int n,s=0;
+ scanf("%d",&n);
+ for(int i=2;i<=n;i++){
+    s=(s+3)%i;
+ }
+ printf("%d\n",s+1);}*/
+
+//70.
+/*int len(char *n){
+    int i=0;
+   while(n[i]!='\0')
+   i++;
+    return i;
+}
+int main(){
+    char name[40];
+    gets(name);
+    printf("%d",len(name));
+    }*/
+
+//71. 随机句子生成程序
+/*void printran(){
+    char* article[]={" the"," a"," one"," some"," any"};
+    char* noun[]={" boy"," girl"," dog"," town"," car"};
+    char* verb[]={" drove"," jumped"," ran"," walked"," skipped"};
+    char* prepsition[]={" to"," from"," over"," under"," on"};
+
+    char sentence[50];
+    strcpy(sentence,article[rand()%5]);//注意数组直接模5.不要加1.还在这里卡了半天.
+    strcat(sentence,noun[rand()%5]);
+    strcat(sentence,verb[rand()%5]);
+    strcat(sentence,prepsition[rand()%5]);
+    strcat(sentence,article[rand()%5]);
+    strcat(sentence,noun[rand()%5]);
+    char c;
+    c=toupper(sentence[1]);
+    sentence[1]=c;
+    int i=1;
+   while(sentence[i]!='\0'){
+        printf("%c",sentence[i]);
+        i++;
+   }
+   printf(".");
+}
+int main()
+{
+    srand(time(NULL));
+    for(int i=0;i<20;i++){
+    printran();puts("");
+    }
+    return 0;
+}*/
+
+//72. 拉丁猪
+/*void latin(char* pr){
+    int i=1;
+    while(pr[i]!='\0'){
+            printf("%c",pr[i]);
+    i++;
+    }
+    printf("%cay ",pr[0]);
+}
+int main(){
+    char a[50];
+    int i=0;char c;
+    while(((c=getchar())!='\n')&&(i<49)){
+            a[i++]=c;
+    }a[i]='\0';
+    char *pr=strtok(a," ");
+    while(pr!=NULL){
+        latin(pr);
+        pr=strtok(NULL," ");
+    }
+}*/
+
+//73. 单词倒序打印
+/*
+int main(){
+    char sentence[50];
+    fgets(sentence,50,stdin);
+    char *pr=strtok(sentence," ");
+    char b[20][15];
+    int i=0;
+    while(pr!=NULL){
+        strcpy(b[i],pr);
+        pr=strtok(NULL," ");
+        i++;
+    }
+    for(int j=i-1;j>=0;j--){
+        if(j!=i-1)
+        puts(b[j]);
+        else
+        printf("%s",b[j]);
+    }
+}*/
+
+//74. 伪内置函数实现
+/*int strcmP(const char* s1,const char* s2){
+    int i=0;
+    while((s1[i]!='\0')&&(s2[i]!='\0')){
+        if(s1[i]!=s2[i]){
+            return (int)s1[i]-s2[i];
+        }
+        i++;
+    }
+    return 0;
+}
+int strncmP(const char* s1,const char* s2,size_t n){
+    for(int i=0;i<n;i++){
+        if((*(s1+i))!=(*(s2+i)))
+            return (int)s1[i]-s2[i];
+    } return 0;
+}
+int main(){
+    printf("%d\n",strncmP("fake insure","fake in false",6));
+    printf("%d",strcmP("fake insure","fake in false"));
+}*/
+
+//75. 统计工具 字母单词 单双字母词
+/*void tiMu_a();
+void tiMu_b();
+void tiMu_c();
+void fillIn();
+
+char sentence[SIZE]={'\0'};//操作都将基于这个数组进行
+
+int main() {
+	char tiMuHao;
+	scanf("%c",&tiMuHao);
+	if(tiMuHao=='a')
+		tiMu_a();
+	else if(tiMuHao=='b')
+		tiMu_b();
+	else if(tiMuHao=='c')
+		tiMu_c();
+
+	return 0;
+}
+void fillIn(){
+    int i=0;
+    int c;
+    while((i<SIZE-1)&&(c=getchar())!='\n'){
+        sentence[i++]=c;
+    }
+    sentence[i]='\0';
+}//从用户处索取，填充字符串
+
+void tiMu_a(){
+    getchar();
+    printf("请输入想要操作的文本，该程序将统计文本中各个字母的个数\n");
+	int counters[26]={0};
+    //初始化数组，用于计数
+    fillIn();
+    for(int j=0;j<=SIZE;j++){
+        for(int k='a';k<='z';k++){
+            if(sentence[j]==k) counters[k-'a']++;
+        }
+    }//计数开始 统计小写字母
+     for(int j=0;j<=SIZE;j++){
+        for(int k='A';k<='B';k++){
+            if(sentence[j]==k) counters[k-'A']++;
+        }
+    }//计数开始 统计大写字母
+
+    for(int j=0;j<26;j++){
+    if(counters[j]!=0)
+    printf("%4c:appearance %3d times\n",j+'a',counters[j]);
+    }
+    //打印
+}
+void tiMu_b(){
+    getchar();
+    printf("请输入想要操作的文本，该程序将统计文本中拥有不同数量字符的单词的出现次数\n");
+	fillIn();
+
+	int counters[100];
+    int j=0;
+    char *tokenptr = strtok(sentence," ");
+    while(tokenptr!=NULL){
+            int i=0;
+        while(tokenptr[i]!='\0'){
+        i++;}
+    counters[j]=i;
+    j++;
+        tokenptr=strtok(NULL," ");
+    }//以上程序块用于存储分割后的第j+1个单词的字母个数i
+
+     for(int i=1;i<=50;i++){
+        int sum=0;
+        for(int k=0;k<=j;k++){
+            if(i==counters[k])
+                sum++;
+        }//依次计算拥有i个字母的单词的数量
+
+    if(sum!=0)
+    printf("拥有%d个字母的单词出现了%d次\n",i,sum);
+    }//打印
+}
+void tiMu_c(){
+     getchar();
+     printf("请输入想要操作的文本，该程序将统计文本中不同单词的出现次数\n");
+	 fillIn();
+
+	 char d[100][30];
+     int j=0;
+     char *tokenptr=strtok(sentence," ");
+      while(tokenptr!=NULL){
+        strcpy(d[j],tokenptr);
+        j++;
+        tokenptr=strtok(NULL," ");
+    }
+    //以上程序块将分割后的第k个字符串存储在d[k]中
+    for(int k=0;k<j;k++){
+        int counters[100]={0};
+
+        for(int m=0;m<j;m++){
+                if(strcmp(d[k],d[m])==0){
+                counters[k]++;
+            }
+    }//依次计算特定单词的数量，将他们存储在counters[k]中
+    int flag=0;
+    for(int m=0;m<k;m++){
+        if(strcmp(d[m],d[k])==0)
+            flag=1;
+    }
+    if(flag==0)
+    printf("单词%s出现了%d次\n",d[k],counters[k]);
+        }//消除重复并打印
+}*/
+
+//76.字符串的排序和查找 冒泡
+/*void exchange(char* m,char* n){
+    char tmp[8];
+    strcpy(tmp,n);
+    strcpy(n,m);
+    strcpy(m,tmp);
+}
+void bubblesort(char name[][6],int n){
+    for(int pass=0;pass<n;pass++){
+        for(int i=0;i<n-pass-1;i++){
+            if(strcmp(name[i],name[i+1])>0){
+                 exchange(name[i+1],name[i]);}
+        }
+    }
+}
+void print(char name[][6],int n){
+    for(int i=0;i<n;i++){
+        puts(name[i]);
+    }
+}
+void linesearch(char* a,char name[][6],int n){
+    int flag=0;
+    for (int i=0;i<n;i++){
+        if(strcmp(name[i],a)==0){
+                flag=1;
+        for(int j=0;j<i;j++)
+       puts(name[j]);printf("******%s\n",name[i]);}
+    }
+    if(flag==0){
+        printf("没有找到");
+    }
+}
+int main()
+{
+    char name[8][6]={"zhao","qian","sun",{'l','i','\0'},"zhou","wu","zheng"};
+
+    scanf("%s",name[7]);
+
+    bubblesort(name,8);
+    print(name,8);
+
+    char x[6];
+    scanf("%s",x);
+    linesearch(x,name,8);
+        }
+*/
+
+//77. 支票保护
+/*
+int main(){
+    char str[9];
+
+    int i=0;
+    char c;
+   while((i<8)&&(c=getchar())!='\n'){
+        str[i++]=c;
+    }
+    str[i]='\0';
+    char*strpt;
+    double d=strtod(str,&strpt);
+
+    if(d>=1000){
+        for(int k=i;k<9;k++)
+            str[k]='0';
+        for(int j=0;j<9;j++)
+            printf("%c",str[j]);
+    }
+    else{
+        for(int k=0;k<9-i;k++)
+            printf("*");
+        for(int j=0;j<i;j++)
+            printf("%c",str[j]);,
+    }
+}*/
+  
+//78.
+/*int main(){
+    int x,y;
+    scanf("%i%d",&x,&y);
+    printf("%d %d\n",x,y);
+
+    for(int i=0;i<=212;i++){
+        double s;
+        s=5.0/9.0*(i-32);
+        printf("%+10.3f",s);
+        printf(i%2==0?"   ":"\n");}
+
+    printf("\"suzy\"");
+    printf("'suzy'\n");
+    printf("suzy");
+    printf("%c\n\n",'?');
+
+    for(int i=1;i<=9;i++)
+        printf("%.*g\n",i,9876.12345);
+}*/
+
+
+//79.
+/*第一问
+struct person{
+    char name[20];
+    int age;
+}p[4]={{"li",18},{"wang",19},{"zhanf",20},{"sun",22}};
+//第二问
+void t2(){
+    char *s[]={"man","woman","girl","boy","sister"};
+    char**q;
+    int k;for(k=0;k<5;k++)
+    {
+        q = &s[k];//省去&是不行的。字符串不能作为基本类型被赋值
+        printf("%s\n",*q);
+    }
+}
+//第三问
+double ad1(int m){
+    double sum=0;
+    for(int i=1;i<=(m/2);i++){
+        sum+=1.0/(2*i);
+    }
+    return sum;
+}
+double ad2(int m){
+    double sum=1;
+    for(int i=1;i<=(m/2);i++){
+        sum+=1.0/(2*i+1);
+    }
+    return sum;
+}
+
+int main()
+{
+   int max=0;
+   for(int i=0;i<4;i++){
+        if(p[i].age>p[max].age){
+            max=i;
+        }
+   }
+   printf("%s",p[max].name);
+   t2();
+//第三问
+   int n;
+   scanf("%d",&n);
+   double(*pr[2])(int)={ad1,ad2};
+   if(n%2==0)
+        printf("%lf",(*pr[0])(n));
+   else
+        printf("%lf",(*pr[1])(n));
+    return 0;
+}
+
+//80.
+main(){整//注意直译,在草纸上打草迭代哈:n个余下0.8n-0.8，则余下x,原有1.25x+1.
+ for(int i=4;i<100000;i+=4){
+    int count=0;
+    int m=i;
+     for(int k=0;k<5;k++){
+        int j=i/4*5+1;
+        i = j;
+        if(j%4==0)
+        count++;
+        else
+        break;
+     }
+     i=m;
+     if(count==4){
+        printf("%d",i);//答案1020
+        break;}//注意取最小值的方式：取到之后接着break;
+ }
+}
+
+//81. 洗牌发牌与函数指针
+/*int shuffle1(int cards[])
+{
+	printf("shuffle1\n");
+	for(int i=0;i<100;i++){
+		int tmp1,tmp2;
+		tmp1 = rand()%54;
+		tmp2 = cards[0];
+		cards[0] = cards[tmp1];
+		cards[tmp1]=tmp2;
+	}
+	return 0;
+}
+int shuffle2(int cards[])
+{
+	printf("shuffle2\n");
+	for(int i=0;i<100;i++){
+		int index1,index2,tmp;
+		index1 = rand()%54;
+		index2 = rand()%54;
+		tmp = cards[index1];
+		cards[index1] = cards[index2];
+		cards[index2]=tmp;
+	}
+	return 0;
+}
+int shuffle3(int cards[])
+{
+	printf("shuffle3\n");
+	for(int i=0;i<54;i++){
+		cards[i] = -1;
+	}
+	for(int i=0;i<54;i++){
+		int tmpIndex;
+		tmpIndex = rand()%54;
+		while(cards[tmpIndex]!= -1){
+			tmpIndex = rand()%54;
+		}
+		cards[tmpIndex] = i;
+	}
+	return 0;
+}//三种洗牌算法
+//根据片面值，输出其英文表示
+void printfCardFace(int cardn)
+{
+	char *suit[4]= {"Hearts","Diamonds","Clubs","Spades"};
+	char *face[13]={"Ace","Deuce","Three","Four","Five",
+					"Six","Seven","Eight","Nine","Ten",
+					"Jack","Queen","King"};
+	if(cardn==53)
+	   printf("JOKER   ");
+	else if(cardn==52)
+		printf("joker   ");
+	else
+		printf("%s %s   ",suit[cardn/13],face[cardn%13]);
+
+}
+int main()
+{
+	int cards[54];
+
+	srand(time(NULL));
+	for(int i=0;i<54;i++){
+		cards[i]=i;
+	}
+
+	int (*shuffle[3])(int cards[])={shuffle1,shuffle2,shuffle3};
+	(*shuffle[rand()%3])(cards);
+
+	int cardn;
+	cardn = rand()%17+1;
+
+	for(int j=0;j<3;j++){		               //循环给3个人发牌
+		for(int i=j*cardn;i<51/(3*cardn)*3*cardn;i+=3*cardn){    //给每个人发几次牌,最后一手牌可能不是cardn张
+			for(int k=0;k<cardn;k++){          //每个人每次发cardn张牌
+				printfCardFace(cards[i+k]);
+			}
+		}
+		//处理最后一手牌可能不是cardn张的情况
+		//计算最后一手牌应发多少张
+		int tmpn1,tmpn2;
+		tmpn1 = 51/(3*cardn)*3*cardn;//已发牌张数
+		tmpn2 = (51-tmpn1-3)/3;       //每人再发几张
+
+		for(int k=0;k<tmpn2;k++){          //每个人再发tmpn2张牌
+			printfCardFace(cards[tmpn1+j*tmpn2+k]);
+		}
+		printf("\n\n");
+	}
+
+	for(int i=51;i<54;i++)
+		printfCardFace(cards[i]);
+}*/
+
+//82.八进制转换为十进制
+//可用n=n*8+p实现变量复用
+/*int power(int m,int n){
+    if(n==0) return 1;
+    return m*power(m,n-1);
+}
+
+int main(){
+    int n,b[100],sum;
+    sum=0;
+    scanf("%d",&n);
+
+    int i;
+    for(i=1;n!=0;i++){
+       b[i]=n%10;
+       n/=10;
+    }
+
+    for(int j=1;j<i;j++){
+        sum+=b[j]*power(8,j-1);
+    }
+    printf("%d",sum);
+}*/
+
+//83.
+/*int fa(int a){
+    if(a==1||a==0)
+        return 1;
+    return a*fa(a-1);
+}
+int cha(int m,int n){
+    return fa(m)/(fa(n)*fa(m-n));
+}
+int main(){
+    long sum=0;
+
+   for(int i=7;i>0;i--){
+        sum += cha(7,i)*(fa(i));
+   }//不包含0的情况
+   for(int i=7;i>0;i--){
+    sum+=i*cha(7,i)*(fa(i));
+   }
+   printf("%d",sum);
+}*/
+
+//84.哥德巴赫猜想
+/*main(){
+    int a,b,c,d;
+    scanf("%d",&a);
+    for(b=3;b<=a/2;b+=2){
+        for(c=2;c<=sqrt(b);c++)
+            if(b%c==0) break;//判断b是否为素数
+            if(c>sqrt(b))
+                d=a-b;//是的话继续判断差
+            else
+                break;//不是的话退出
+
+            for(c=2;c<=sqrt(d);c++)
+                if(d%c==0) break;
+            if(c>sqrt(d))
+                printf("%d=%d+%d\n",a,d,b);
+
+    }
+}*/
+
+//85.
+/*main(){
+    int n;
+    scanf("%d",&n);
+    int co=0;
+    while(n%9==0){
+        n/=9;
+        co++;
+    }
+    printf("%d",co);
+}*/
+
+//86.
+/*int Strcat(char* s1,char* s2){
+  int i=0;
+  int j=0;
+  while(s1[i]!='\0')
+    i++;
+  while(s2[j]!='\0'){
+    s1[i+j]=s2[j];
+    j++;
+  }
+  s1[i+j]='\0';
+    return s1;
+}
+main(){
+    char name1[100]="hh";
+    char name2[100]="kk";//指针是不行的会警告
+    printf("%s",Strcat(name1,name2));
+}*/
+
+//87.显式二进制
+void decimal(unsigned int n,int a[]){
+    unsigned int mask = 1 << 31;
+    for(int i=0;i<32;i++){
+    a[i] = (n&mask?1:0);
+    mask >>= 1;
+   }
+main(){
+    unsigned int u;
+    scanf("%u",&u);
+    int b[32];
+    decimal(u,b);
+    for(int i=0;i<32;i++)
+    printf("%d",b[i]);
+}*/
+
+//88. 链表统计学生信息
+struct node{
+    double n[3];
+    char g;
+    char name[15];
+    struct node* pNext;
+};
+typedef struct node* nptr;
+int main()
+{
+    nptr pHead= NULL ,pNow= NULL ,pNode = NULL;
+    int n;
+    printf("请输入学生人数:");
+    scanf("%d",&n);
+    getchar();
+    for(int j=0;j<n;j++){
+        pNode = malloc(sizeof(struct node));
+        if(pNode!=NULL){
+            printf("请输入第%d个学生名字：",j+1);
+            gets(pNode->name);
+            printf("请输入第%d个学生性别(m or f)",j+1);
+            scanf("%c",&pNode->g);
+        for(int k=1;k<=3;k++){
+            printf("请输入该学生第%d个成绩",k);
+            scanf("%lf",&pNode->n[k-1]);}
+            getchar();
+            pNode->pNext=NULL;
+            if(pHead==NULL){
+                pHead=pNode;
+                pNow=pNode;
+            }
+            else{
+                pNow->pNext=pNode;
+                pNow=pNode;
+            }
+        }
+   }
+   pNode=pHead;
+   while(pNode!=NULL){
+    printf("姓名：%8s\t",pNode->name);
+    printf(pNode->g=='m'?"性别:男\t":"性别:女\t");
+    printf("平均分%4.2f\n",(pNode->n[2]+pNode->n[1]+pNode->n[0])/3);
+    pHead=pNode;
+    pNode=pNode->pNext;
+    free(pHead);
+   }
+    return 0;
+}*/
+
+//89
+/*main(){
+    int n;
+    scanf("%d",&n);
+    int b[4]={n%10,(n/10)%10,(n/100)%10,n/1000};
+    for(int i=0;i<4;i++)
+        b[i] = (b[i]+5)%10;
+    int m = b[3]+b[2]*10+b[1]*100+b[0]*1000;
+    printf("%d",m);
+}*/
+
+//90.预处理练习
+/*
+#include <stdlib.h>
+#define ball(x) ((4.0/3)*3.14*(x)*(x)*(x))
+#define SUM(x,y) (x+y)
+#define min(x,y) (x<y?x:y)
+#define PRINT puts
+#define acc(a,y) tip(a,y)
+
+int tip (int a[],int n){
+     int sum=0;
+     for(int i=0;i<n;i++){
+        sum+=a[i];
+     }
+     return sum;
+}
+int main()
+{
+   for(int i=1;i<=10;i++){
+    printf("%.2f",ball(i));
+    putchar(i%2==1?'\t':'\n');
+   }
+   printf("the sum of x and y is %d,the min is %d\n",SUM(5,8),min(5,8));
+   PRINT("CONTINUE...");
+  int a[3]={2,6,7};
+  printf("%d\n",acc(a,3));
+  printf("%d",x);
+    return 0;
+}*/
+
+//91 计时练习
+/*main(){
+    clock_t start,end;
+    start =clock();
+    //time_t start,end;
+    //start=time(NULL);
+
+    for(int i=0;i<3000;i++){
+        printf("111111111111\n");
+        //end=time(NULL);
+        end=clock();
+        //printf("the differ is %6.3f",difftime(end,start));
+        printf("the differ is %6.3f",(double)(end-start));
+    }
+}*/
+
+//92.猜数（计时版本）
+/*main(){
+    char c;
+    clock_t start,end;
+    time_t a,b;
+
+    int i,guess;
+    srand(time(NULL));
+    printf("do you want to play(y or n)?\n");
+    while((c=getchar())=='y'){
+        i=rand()%10;
+        printf("input");
+        start=clock();
+        a=time(NULL);
+        scanf("%d",&guess);
+        while(guess!=i){
+            if(guess>i){
+                puts("need a smaller\n");
+                scanf("%d",&guess);}
+            else if(guess<i){
+                puts("need a bigger\n");
+                 scanf("%d",&guess);}}
+            end=clock();
+            b=time(NULL);
+            printf("it took you %6.3f seconds\n",(double)(end-start)/CLOCKS_PER_SEC);
+            printf(" took you %6.3f seconds\n",difftime(b,a));
+        printf("do you want to play(y or n)?\n");
+        getchar();
+        }
+    }*/
+
+93.按位异或对称密钥
+/*
+void change(int* a,int* b){
+    int temp=*a^*b;
+    *a=temp^*a;
+    *b=temp^*b;
+}
+main(){
+    int n;
+    scanf("%d",&n);
+    printf("u=%d,n=%d",u,n);
+    change(&u,&n);
+    printf("u=%d,n=%d",u,n);}
+*/
+    
+//94.时间调用练习
+/*main(){
+    time_t timer=time(NULL);
+    printf(ctime(&time));//未本地时间化
+    struct tm* tblock;
+    tblock=localtime(&timer);
+    printf("time is %s",asctime(tblock));
+    tblock=gmtime(&timer);
+    printf("gelinweizhi time is %s",asctime(tblock));
+}*/
+
+//95. 可变长参数列表
+/*int acc(int n,...){
+    int re = 1;
+    va_list ac;
+    va_start(ac,n);
+    for(int i=0;i<n;i++){
+        re *= va_arg(ac,int);
+    }
+    va_end(ac);
+    return re;
+}
+main(){
+printf("%d",acc(3,3,2,3));
+}*/
+
+//96. Callocation REallocation
+/*main(){
+    int n;
+    scanf("%d",&n);
+    int* a;
+    a=calloc(n,sizeof(int));
+    for(int i=0;i<n;i++)
+    scanf("%d",&a[i]);
+    for(int i=0;i<n;i++)
+    printf("%d\n",a[i]);
+    realloc(a,sizeof(int)*n/2);
+    for(int i=0;i<n/2;i++)
+    printf("%d\n",a[i]);
+}*/
+
+//97.  
+main(){
+unsigned long u = 1;
+for(int i=0;i<10;++i){
+ u <<= 1;
+printf("二的10次方是%d",poer(10));}
+
+//98. GOTO语句：有本事就读
+main(){
+    int d=1;
+    int c=1;
+    int re=1;
+    o:
+    printf("%s","*");
+    c++;
+    if(c<=5)
+    goto o;
+    else goto b;
+    b:
+    printf("%s","\n");
+    printf("%s","*");
+    c=1;
+    m:
+    printf("%s"," ");
+    c++;
+    if(c<=3)
+    goto m;
+    printf("%s","*");
+    d++;
+    if(d<=3)
+    goto b;
+    printf("%s","\n");
+    c=1;
+    o2:
+    printf("%s","*");
+    c++;
+    if(c<=5)
+    goto o2;
+    return 0;
+}
+
+//99.初识C++
+/*
+#include <iostream>
+const int strsize = 15;
+using namespace std;
+struct bop{
+    char fullname[strsize];
+    char title[strsize];
+    char popname[strsize];
+    int preference;
+};
+void instructions(void);
+int main()
+{
+   bop as[5]={
+   {
+      "william" ,"leader","xiaowei" ,2
+   },
+   {
+       "james","helper","xiaojei",3
+   },
+   {
+       "bob","memeber","xiaobao",1
+   },
+   {
+        "li","memeber","xiaobli",1
+   },
+   {
+        "tokmi","memeber","xiaotou",1
+   }
+   };
+  instructions();
+  cout << '?';
+  char c;
+  cin>> c;
+   while(c!='g'){
+    switch(c){
+    case 'a':
+        for(int i=0;i<5;i++)
+            cout << as[i].fullname;
+        break;
+    case 'b':
+        for(int i=0;i<5;i++)
+            cout << as[i].title;
+        break;
+    case 'c':
+        for(int i=0;i<5;i++)
+            cout << as[i].popname;
+        break;
+    case 'd':
+        cout << "please assign a preference number :";
+        int i;
+        cin >> i;
+        for(int j=0;j<5;j++)
+            if(i==as[j].preference)
+               cout << as[j].popname;
+        break;
+    default:
+        continue;
+    }
+    cout << '?';
+    cin >> c;
+   }
+    return 0;
+}
+void instructions(void){
+  cout <<"a:display by name\t b:display by title\n";
+   cout <<"c:display by pop name\t d:display by preference\n";
+   cout <<"q:quit";
+}*/
+
+//100.C++:一个更健壮的C——这只是一个开始
+//多文件编译与类的封装
+//config 2e.h
+#include<string>
+class gradeBook{
+public:
+    explicit gradeBook(std::string,std::string);
+    void setCourseName(std::string);
+    void setTeacherName(std::string);
+    std::string getCourseName() const;
+    std::string getTeacherName() const;
+    void displayMessage() const;
+private:
+    std::string courseName;
+    std::string teacherName;
+    };
+class Invoice{
+public:
+    explicit Invoice(std::string,std::string,int,int);
+    void setAcc(std::string);
+    std::string getAcc();
+    void setDescription(std::string);
+    std::string getDescription();
+    void setItems(int);
+    int getItems();
+    void setPrice(double);
+    int getPrice();
+    int getInvoiceAccount(void);
+private:
+    int price;
+    int items;
+    std::string acc;
+    std::string description;
+};
+//config ass.cpp
+#include<iostream>
+#include"2e.h"
+#include<ctype.h>
+#include<math.h>
+using namespace std;
+int isint(double a){
+   double b = pow(10,-6.0);
+    if(((a-(int)a)<b)&&((a-(int)a)>-b))
+        return 1;
+    return 0;
+}//判断是否为整数
+gradeBook::gradeBook(string name,string teacher)
+  :teacherName(teacher)
+    {
+        setCourseName(name);
+    }
+void gradeBook::setCourseName(string name){
+   if(name.size() <= 25)
+        courseName = name;
+    else if(name.size() > 25){
+        courseName = name.substr(0,25);
+        cerr << "Name \"" <<name<< "\" exceed maximum length(25).\n"
+        "limiting courseName to first 25 characters" << endl;
+    }
+}
+void gradeBook::setTeacherName(string name){
+   teacherName = name;
+}
+string gradeBook::getCourseName() const{
+    return courseName;
+}
+string gradeBook::getTeacherName() const{
+    return teacherName;
+}
+void gradeBook::displayMessage() const{
+    cout << "\nwelcome to the grade book for" << getCourseName()
+    << "!" << endl <<"the course is presented by :" << getTeacherName();
+}
+//end for funs of gradeBook;
+Invoice::Invoice(string s1,string s2,int n1,int n2)
+    :acc(s1),
+     description(s2),
+     items(n1),
+     price(n2)
+        {
+        }
+void Invoice::setAcc(string s){
+    acc = s;
+    }
+string Invoice::getAcc(){
+    return acc;
+    }
+void Invoice::setDescription(string s){
+    description = s;
+    }
+string Invoice::getDescription(){
+    return description;
+    }
+void Invoice::setItems(int x){
+    if(x < 0){
+        cout << "the number is valid, change to 0;" << endl;
+        items = 0;
+    }
+    else
+        items = x;}
+int Invoice::getItems(){
+    return items;
+    }
+void Invoice::setPrice(double x){
+    if(x!=(int)x){//如果不想交给编译器控制，请使用上方的函数ISINT
+        cout << "price is not an integer,set to 0;" << endl;
+        price = 0;
+    }
+    else
+        price = x;
+    }
+int Invoice::getPrice(){
+    return price;
+    }
+int Invoice::getInvoiceAccount(){
+    return items*price;
+    }
+//config main.cpp(testing)
+#include <iostream>
+#include "2e.h"
+#define grade
+//#define invoice
+using namespace std;
+class Date{
+public:
+    explicit Date(int x,int y,int z)
+    :month(x),
+    date(y),
+    year(z)
+    {
+    }
+    void setmonth(int moth){
+        if(moth>=1&&moth<=12){
+            month = moth;
+        }
+        else{
+            month = 1;
+        }
+    }
+    void display(void){
+        cout << month << "\\" << date << "\\" << year;
+    }
+private:
+    int month;
+    int date;
+    int year;
+};
+int main()
+{
+    #ifdef grade
+    gradeBook gradebook1("Introduction to C++ advancer 's programing","weige");
+    gradeBook gradebook2("data structure","laomin");
+    cout << "gradebook1 create for course"<< gradebook1.getCourseName()
+    << "\ngradebook1 create for course" << gradebook2.getCourseName() << endl;
+    gradebook1.displayMessage();
+    gradebook2.displayMessage();
+    #endif
+    #ifdef invoice
+    Invoice invoice1("C++ data","an extra lesson",5,7);
+    cout << invoice1.getInvoiceAccount()<< endl;
+    invoice1.setPrice(7.1);
+    cout << invoice1.getInvoiceAccount();
+    #endif
+    Date date(3,5,6);
+    date.display();
+    date.setmonth(7);
+    date.display();
+    date.setmonth(17);
+    date.display();
+}
+
+
+
+	
