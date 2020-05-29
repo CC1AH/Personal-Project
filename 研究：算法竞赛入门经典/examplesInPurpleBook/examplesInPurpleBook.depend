@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1589426379 source:d:\res\personal-project\研究：算法竞赛入门经典\examplesinpurplebook\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<limits>
+	<ctime>
+	<algorithm>
+	<vector>
+	<string.h>
+	<cctype>
+	"Unit4.h"
+
+1578902701 d:\res\personal-project\研究：算法竞赛入门经典\examplesinpurplebook\unit1.h
+
+1579149090 d:\res\personal-project\研究：算法竞赛入门经典\examplesinpurplebook\unit2.h
+
+1583235127 d:\res\personal-project\研究：算法竞赛入门经典\examplesinpurplebook\unit3.h
+
+1584758659 d:\res\personal-project\研究：算法竞赛入门经典\examplesinpurplebook\unit4.h
+
